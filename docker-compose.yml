@@ -1,25 +1,30 @@
+
 services:
-  api:
+  app:
+    image: bancodigital-app
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "8080:80"
     depends_on:
       - db
     environment:
-      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=seu_banco;Username=postgres;Password=123456
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=BancoDigitalDb;Username=postgres;Password=MinhaSenhaForte123
 
   db:
     image: postgres:15
+    container_name: postgres-db
+    restart: always
     environment:
-      POSTGRES_DB: seu_banco
+      POSTGRES_DB: BancoDigitalDb
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 123456
+      POSTGRES_PASSWORD: 190588
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
 
 volumes:
-  pgdata:
+  postgres-data:
