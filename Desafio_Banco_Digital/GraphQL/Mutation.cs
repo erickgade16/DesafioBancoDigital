@@ -9,7 +9,7 @@ namespace DesafioBancoDigital.API.GraphQL
         // Realiza saque e trata erros esperados
         public async Task<Conta> Sacar(
             [GraphQLName("conta")] int numeroConta,
-            decimal valor,
+            double valor,
             [Service] ContaServices contaServices)
         {
             try
@@ -42,7 +42,7 @@ namespace DesafioBancoDigital.API.GraphQL
         // Realiza depósito e trata erros esperados
         public async Task<Conta> Depositar(
             [GraphQLName("conta")] int numeroConta,
-            decimal valor,
+            double valor,
             [Service] ContaServices contaServices)
         {
             try

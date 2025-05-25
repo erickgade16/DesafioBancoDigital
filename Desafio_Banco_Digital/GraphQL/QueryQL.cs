@@ -5,7 +5,7 @@ namespace DesafioBancoDigital.API.GraphQL
 {
     public class QueryQL
     {
-        public async Task<decimal> Saldo(
+        public async Task<double> Saldo(
             [GraphQLName("conta")] int numeroConta,
             [Service] ContaServices contaServices)
         {

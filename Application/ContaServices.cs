@@ -14,7 +14,7 @@ namespace Application
             _contaRepository = contaRepository;
         }
         //Servico para sacar e verificar se conta existe, se o valor é valido e se o saldo é suficiente.
-        public async Task<Conta> Sacar(int numeroConta, decimal valor)
+        public async Task<Conta> Sacar(int numeroConta, double valor)
         {
             var conta = await _contaRepository.ObterPorNumero(numeroConta);
 
@@ -27,7 +27,7 @@ namespace Application
             return conta;
         }
         //Servico para depositar e verificar se conta existe, se o valor é valido.
-        public async Task<Conta> Depositar(int numeroConta, decimal valor)
+        public async Task<Conta> Depositar(int numeroConta, double valor)
         {
             var conta = await _contaRepository.ObterPorNumero(numeroConta);
 
@@ -41,17 +41,14 @@ namespace Application
         }
 
         //Servico para Obter saldo de uma conta com numero e verifica se a conta existe.
-        public async Task<decimal> ObterSaldo(int numeroConta)
+        public async Task<double> ObterSaldo(int numeroConta)
         {
             var conta = await _contaRepository.ObterPorNumero(numeroConta);
 
             if (conta == null)
                 throw new ContaNaoEncontradaException(numeroConta);
 
-
             return conta.SaldoConta;
         }
-
-
     }
 }

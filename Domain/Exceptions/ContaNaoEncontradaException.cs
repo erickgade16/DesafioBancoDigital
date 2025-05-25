@@ -1,4 +1,4 @@
-﻿namespace DesafioBancoDigital.Domain.Exceptions
+namespace DesafioBancoDigital.Domain.Exceptions
 {
     public class ContaNaoEncontradaException : Exception
     {
@@ -7,4 +7,4 @@
         {
         }
     }
-}
+} 
