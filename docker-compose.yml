@@ -1,14 +1,28 @@
 services:
-  app:
-    image: bancodigital-app
+  desafiobancodigital.api:
+    image: desafiobancodigital
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8080:80"
+      - "5000:80"
+      - "5001:443"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Host=db.ehmxvowmuyctkejiqvjo.supabase.co;Port=5432;Database=postgres;Username=postgres;Password=${DB_PASSWORD};Ssl Mode=Require;Trust Server Certificate=true
+      - ConnectionStrings__DefaultConnection=Host=db.expuftdjveyaqxfhadnv.supabase.co;Port=5432;Database=postgres;Username=postgres;Password=190588;Ssl Mode=Require;Trust Server Certificate=true;
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=bancodigital
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
 volumes:
-  postgres-data:
+  postgres_data:

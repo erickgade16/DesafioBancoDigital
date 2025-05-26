@@ -2,13 +2,10 @@
 
 # Esta fase é usada durante a execução no VS no modo rápido (Padrão para a configuração de Depuração)
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
-USER $APP_UID
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
+EXPOSE 80
+EXPOSE 443
 
-
-# Esta fase é usada para compilar o projeto de serviço
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
@@ -21,17 +18,12 @@ RUN dotnet restore "Desafio_Banco_Digital/DesafioBancoDigital.API.csproj"
 
 # Copiar o resto do código e fazer o build
 COPY . .
+RUN dotnet build "Desafio_Banco_Digital/DesafioBancoDigital.API.csproj" -c Release -o /app/build
+
+FROM build AS publish
 RUN dotnet publish "Desafio_Banco_Digital/DesafioBancoDigital.API.csproj" -c Release -o /app/publish
 
-# Build da imagem final
-FROM mcr.microsoft.com/dotnet/aspnet:9.0
+FROM base AS final
 WORKDIR /app
-COPY --from=build /app/publish .
-
-# Configurar variáveis de ambiente
-ENV ASPNETCORE_URLS=http://+:80
-ENV ASPNETCORE_ENVIRONMENT=Production
-
-EXPOSE 80
-
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "DesafioBancoDigital.API.dll"]
