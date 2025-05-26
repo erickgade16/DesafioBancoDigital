@@ -19,6 +19,36 @@ namespace DesafioBancoDigital.Test.Infrastructure
         }
 
         [Fact]
+        public async Task CriarConta_PrimeiraConta()
+        {
+            using var context = CreateContext();
+            var repository = new ContaRepository(context);
+
+            var saldoInicial = 1000.0;
+            var conta = await repository.CriarConta(saldoInicial);
+
+            Assert.Equal(1, conta.NumeroConta);
+            Assert.Equal(saldoInicial, conta.SaldoConta);
+        }
+
+        [Fact]
+        public async Task CriarConta_ContaSubsequente()
+        {
+            using var context = CreateContext();
+            var repository = new ContaRepository(context);
+
+            // Criar primeira conta
+            await repository.CriarConta(1000.0);
+
+            // Criar segunda conta
+            var saldoInicial = 2000.0;
+            var conta = await repository.CriarConta(saldoInicial);
+
+            Assert.Equal(2, conta.NumeroConta);
+            Assert.Equal(saldoInicial, conta.SaldoConta);
+        }
+
+        [Fact]
         public async Task ObterPorNumero_ContaExistente()
         {
             using var context = CreateContext();

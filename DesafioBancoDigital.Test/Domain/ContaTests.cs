@@ -46,9 +46,12 @@ namespace DesafioBancoDigital.Tests.Domain
         [Fact]
         public void CriarContaComValoresIniciais()
         {
-            var conta = new Conta(1, 1000);
-            Assert.Equal(1, conta.NumeroConta);
-            Assert.Equal(1000, conta.SaldoConta);
+            var numeroConta = 1;
+            var saldoInicial = 1000.0;
+            var conta = new Conta(numeroConta, saldoInicial);
+
+            Assert.Equal(numeroConta, conta.NumeroConta);
+            Assert.Equal(saldoInicial, conta.SaldoConta);
         }
     }
 }

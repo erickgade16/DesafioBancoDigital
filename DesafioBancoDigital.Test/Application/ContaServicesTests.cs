@@ -10,6 +10,34 @@ namespace DesafioBancoDigital.Test.Application
     public class ContaServicesTests
     {
         [Fact]
+        public async Task CriarContaTest()
+        {
+            var saldoInicial = 1000.0;
+            var numeroConta = 1;
+            var novaConta = new Conta(numeroConta, saldoInicial);
+            
+            var repoMock = new Mock<IContaRepository>();
+            repoMock.Setup(r => r.CriarConta(saldoInicial)).ReturnsAsync(novaConta);
+
+            var service = new ContaServices(repoMock.Object);
+            var resultado = await service.CriarConta(saldoInicial);
+
+            Assert.Equal(numeroConta, resultado.NumeroConta);
+            Assert.Equal(saldoInicial, resultado.SaldoConta);
+        }
+
+        [Fact]
+        public async Task CriarContaComSaldoNegativo()
+        {
+            var saldoInicial = -100.0;
+            var repoMock = new Mock<IContaRepository>();
+            var service = new ContaServices(repoMock.Object);
+
+            await Assert.ThrowsAsync<ValorInvalidoException>(() => 
+                service.CriarConta(saldoInicial));
+        }
+
+        [Fact]
         public async Task SacarTest()
         {
             var conta = new Conta(1, 1000);

@@ -4,7 +4,6 @@ using DesafioBancoDigital.Domain.Interface;
 using DesafioBancoDigital.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace DesafioBancoDigital.Infrastructure.Repository
 {
     public class ContaRepository : IContaRepository
@@ -33,5 +32,19 @@ namespace DesafioBancoDigital.Infrastructure.Repository
             await _context.SaveChangesAsync();
         }
 
+        public async Task<Conta> CriarConta(double saldoInicial)
+        {
+            var ultimaConta = await _context.Contas
+                .OrderByDescending(c => c.NumeroConta)
+                .FirstOrDefaultAsync();
+
+            int proximoNumero = (ultimaConta?.NumeroConta ?? 0) + 1;
+            var novaConta = new Conta(proximoNumero, saldoInicial);
+
+            await _context.Contas.AddAsync(novaConta);
+            await _context.SaveChangesAsync();
+
+            return novaConta;
+        }
     }
 }

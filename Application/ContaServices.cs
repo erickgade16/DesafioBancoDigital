@@ -49,5 +49,13 @@ namespace Application
 
             return conta.SaldoConta;
         }
+
+        public async Task<Conta> CriarConta(double saldoInicial)
+        {
+            if (saldoInicial < 0)
+                throw new ValorInvalidoException(saldoInicial);
+
+            return await _contaRepository.CriarConta(saldoInicial);
+        }
     }
 }

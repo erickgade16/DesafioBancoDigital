@@ -11,8 +11,6 @@ namespace DesafioBancoDigital.Domain.Interface
     {
         Task<Conta> ObterPorNumero(int numeroConta);
         Task AtualizarSaldo(Conta conta);
-
-
-
+        Task<Conta> CriarConta(double saldoInicial);
     }
 }

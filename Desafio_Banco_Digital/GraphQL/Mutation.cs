@@ -6,6 +6,23 @@ namespace DesafioBancoDigital.API.GraphQL
 {
     public class Mutation
     {
+        public async Task<Conta> CriarConta(
+            [GraphQLName("saldoInicial")] double saldoInicial,
+            [Service] ContaServices contaServices)
+        {
+            try
+            {
+                return await contaServices.CriarConta(saldoInicial);
+            }
+            catch (ValorInvalidoException ex)
+            {
+                throw new GraphQLException(ErrorBuilder.New()
+                    .SetMessage(ex.Message)
+                    .SetCode("Valor invalido")
+                    .Build());
+            }
+        }
+
         public async Task<Conta> Sacar(
             [GraphQLName("conta")] int numeroConta,
             double valor,
