@@ -7,7 +7,7 @@ namespace DesafioBancoDigital.Tests.Domain
 {
     public class ContaTests
     {
-        //Reduzir o saldo da conta, verificando se o valor é valido e se o saldo é suficiente.
+
         [Fact]
         public void ReduzirSaldo ()
         {
@@ -19,7 +19,6 @@ namespace DesafioBancoDigital.Tests.Domain
             Assert.Equal(800, conta.SaldoConta);
         }
 
-        //Aumentar o saldo da conta, verificando se o valor é valido.
         [Fact]
         public void AumentarSaldo()
         {

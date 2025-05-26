@@ -6,7 +6,6 @@ namespace DesafioBancoDigital.API.GraphQL
 {
     public class Mutation
     {
-        // Realiza saque e trata erros esperados
         public async Task<Conta> Sacar(
             [GraphQLName("conta")] int numeroConta,
             double valor,
@@ -39,7 +38,6 @@ namespace DesafioBancoDigital.API.GraphQL
             }
         }
 
-        // Realiza depósito e trata erros esperados
         public async Task<Conta> Depositar(
             [GraphQLName("conta")] int numeroConta,
             double valor,

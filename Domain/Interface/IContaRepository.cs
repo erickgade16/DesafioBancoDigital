@@ -9,7 +9,6 @@ namespace DesafioBancoDigital.Domain.Interface
 {
     public interface IContaRepository
     {
-        /// Interface para o repositorio de contas bancarias.
         Task<Conta> ObterPorNumero(int numeroConta);
         Task AtualizarSaldo(Conta conta);
 

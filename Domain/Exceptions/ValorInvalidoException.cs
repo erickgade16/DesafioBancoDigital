@@ -7,4 +7,4 @@ namespace DesafioBancoDigital.Domain.Exceptions
         {
         }
     }
-} 
+}

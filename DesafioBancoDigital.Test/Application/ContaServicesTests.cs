@@ -7,7 +7,7 @@ namespace DesafioBancoDigital.Test.Application
 {
     public class ContaServicesTests
     {
-        //Teste servico de saque.
+
         [Fact]
         public async Task SacarTest()
         {
@@ -19,14 +19,13 @@ namespace DesafioBancoDigital.Test.Application
 
             var service = new ContaServices(repoMock.Object);
 
-            
+
             var resultado = await service.Sacar(1, 200);
 
-            
+
             Assert.Equal(800, resultado.SaldoConta);
         }
 
-        //Teste servico de deposito.
         [Fact]
         public async Task DepositarTest()
         {
@@ -42,7 +41,6 @@ namespace DesafioBancoDigital.Test.Application
             Assert.Equal(800, resultado.SaldoConta);
         }
 
-        // Testa o serviço ObterSaldo
         [Fact]
         public async Task ObterSaldoTest()
         {

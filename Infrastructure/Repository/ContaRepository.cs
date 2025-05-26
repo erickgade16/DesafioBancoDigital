@@ -15,8 +15,7 @@ namespace DesafioBancoDigital.Infrastructure.Repository
         {
             _context = context;
         }
-        //Pegar primeira conta que tem o numero igual ao numero da conta que foi passada como parametro.
-        // Verifica se a conta existe, se não existir lança uma exceção.
+
         public async Task<Conta> ObterPorNumero(int numeroConta)
         {
             var conta = await _context.Contas
@@ -27,12 +26,12 @@ namespace DesafioBancoDigital.Infrastructure.Repository
 
             return conta;
         }
-        //Atualiza o saldo da conta que foi passada como parametro.
+
         public async Task AtualizarSaldo(Conta conta)
         {
             _context.Contas.Update(conta);
             await _context.SaveChangesAsync();
         }
-       
+
     }
 }

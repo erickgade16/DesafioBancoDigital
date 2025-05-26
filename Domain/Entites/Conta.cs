@@ -15,7 +15,7 @@ namespace DesafioBancoDigital.Domain.Entites
         [Column("SaldoConta")]
         public double SaldoConta { get; private set; }
 
-        //metodo para sacar o valor da conta, verifica se o valor é valido e se o saldo é suficiente.
+
         public void Sacar(double valor)
         {
             if (valor <= 0)
@@ -29,7 +29,7 @@ namespace DesafioBancoDigital.Domain.Entites
 
             SaldoConta -= valor;
         }
-        //metodo para depositar o valor da conta, verifica se o valor é valido.
+
         public void Depositar(double valor)
         {
             if (valor <= 0)
