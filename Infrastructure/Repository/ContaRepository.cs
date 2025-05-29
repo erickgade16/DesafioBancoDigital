@@ -34,12 +34,7 @@ namespace DesafioBancoDigital.Infrastructure.Repository
 
         public async Task<Conta> CriarConta(double saldoInicial)
         {
-            var ultimaConta = await _context.Contas
-                .OrderByDescending(c => c.NumeroConta)
-                .FirstOrDefaultAsync();
-
-            int proximoNumero = (ultimaConta?.NumeroConta ?? 0) + 1;
-            var novaConta = new Conta(proximoNumero, saldoInicial);
+            var novaConta = new Conta(0, saldoInicial);
 
             await _context.Contas.AddAsync(novaConta);
             await _context.SaveChangesAsync();

@@ -9,6 +9,7 @@ namespace DesafioBancoDigital.Domain.Entites
     {
         [GraphQLName("conta")]
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int NumeroConta { get; private set; }
 
         [GraphQLName("saldo")]
