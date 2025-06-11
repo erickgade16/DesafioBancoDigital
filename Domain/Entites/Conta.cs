@@ -16,6 +16,8 @@ namespace DesafioBancoDigital.Domain.Entites
         [Column("SaldoConta")]
         public double SaldoConta { get; private set; }
 
+        //teste
+
 
         public void Sacar(double valor)
         {
